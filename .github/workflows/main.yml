@@ -1,0 +1,5 @@
+- name: Load environment variables
+  run: |
+    echo "Loading environment variables from config/env.list"
+    source config/env.list || true
+
