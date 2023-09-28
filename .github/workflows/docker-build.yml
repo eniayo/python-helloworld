@@ -11,7 +11,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Set up Python 3.11.5
         uses: actions/setup-python@v2
@@ -51,4 +51,11 @@ jobs:
         env:
           BUILDX_OUTPUT: ${{ steps.build.outputs.digest }}
         run: echo "BUILDX_OUTPUT=${BUILDX_OUTPUT}" >> $GITHUB_ENV
+
+      - name: Set up DockerHub PAT
+        run: echo "${{ secrets.DOCKERHUB_PAT }}" >> $GITHUB_ENV
+
+      - name: Login to DockerHub with PAT
+        run: echo "${{ secrets.DOCKERHUB_PAT }}" | docker login -u eni1998 --password-stdin
+
 
