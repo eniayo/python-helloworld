@@ -13,6 +13,11 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
       - name: Checkout
         uses: actions/checkout@v2
 
@@ -40,10 +45,10 @@ jobs:
       - name: Save Docker Buildx Outputs
         env:
           BUILDX_OUTPUT: ${{ steps.build.outputs.digest }}
-        run: echo "::set-env name=BUILDX_OUTPUT::${BUILDX_OUTPUT}" # Deprecated, consider using Environment Files
+        run: echo "::set-env name=BUILDX_OUTPUT::${BUILDX_OUTPUT}"
 
       - name: Save Docker Buildx Outputs to File
         env:
           BUILDX_OUTPUT: ${{ steps.build.outputs.digest }}
-        run: echo "BUILDX_OUTPUT=${BUILDX_OUTPUT}" >> $GITHUB_ENV # Recommended method using Environment Files
+        run: echo "BUILDX_OUTPUT=${BUILDX_OUTPUT}" >> $GITHUB_ENV
 
