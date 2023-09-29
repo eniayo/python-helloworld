@@ -46,7 +46,5 @@ jobs:
         run: echo "::set-env name=BUILDX_OUTPUT::${BUILDX_OUTPUT}"
 
       - name: Save Docker Buildx Outputs to File
-        env:
-          BUILDX_OUTPUT: ${{ steps.build.outputs.digest }}
-        run: echo "BUILDX_OUTPUT=${BUILDX_OUTPUT}" >> $GITHUB_ENV
+        run: echo "BUILDX_OUTPUT=${{ steps.build.outputs.digest }}" >> env.list
 
